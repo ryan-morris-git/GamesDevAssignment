@@ -545,7 +545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platform: {fileID: 964145182}
-  player: {fileID: 0}
+  player: {fileID: 404737373330190102}
 --- !u!65 &531997933
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -829,7 +829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platform: {fileID: 1019133469}
-  player: {fileID: 0}
+  player: {fileID: 404737373330190102}
 --- !u!65 &768904239
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1472,8 +1472,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1973067774}
-  m_LocalRotation: {x: 0.12801875, y: 0.71982336, z: 0.1379267, w: -0.66816294}
-  m_LocalPosition: {x: 132.33936, y: 17.7106, z: 30.428928}
+  m_LocalRotation: {x: 0.063989244, y: 0.7236041, z: 0.067728974, w: -0.6838972}
+  m_LocalPosition: {x: 162.41005, y: 27.89639, z: 4.2822795}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 198522494}
@@ -1900,8 +1900,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c464e49eff34943b1e0ffa98366a4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  jumpForce: 8
+  speed: 6
+  jumpForce: 6
 --- !u!54 &404737373330190104
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1916,7 +1916,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!65 &404737373330190105
 BoxCollider:
