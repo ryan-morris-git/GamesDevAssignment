@@ -77,6 +77,7 @@ public class CharacterControl : MonoBehaviour
             //if player is on double jump, then game will perform jump action specific to double jump (e.g reduce height)
             if(jumpCount == 1)
             {
+                //double jump heigh reduced
                 rb.AddForce(Vector3.up * jumpForce/2, ForceMode.VelocityChange);
                 jumpCount += 1;
             }
