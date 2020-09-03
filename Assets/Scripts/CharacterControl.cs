@@ -60,16 +60,26 @@ public class CharacterControl : MonoBehaviour
         Vector3 dir = right * hor + forward * ver;
         // moves player
         transform.position += dir * speed * Time.deltaTime;
-        // sets rotation to direction of camera
-        if (dir != Vector3.zero)  {
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(right * hor + forward * ver), 0.4f);
+        
+        
+        if(Input.GetKey(KeyCode.Mouse1))
+        {
+            transform.Rotate(0, Input.GetAxis("Mouse X"), 0);
         }
+        else
+        {
+            // sets rotation to direction of camera
+            if (dir != Vector3.zero)  {
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(right * hor + forward * ver), 0.4f);
+            }
+        }
+        
 
 
     }
 
 
-    // Function to control jumping 
+    // Function to control Double Jump acitions 
     void Jumping()
     {
         if (Input.GetKeyDown(KeyCode.Space) && (jumpCount < 2))
