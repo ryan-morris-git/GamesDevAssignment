@@ -7,8 +7,11 @@ public class CharacterControl : MonoBehaviour
     public float rotspeed = 2.0f;
     public float speed = 5.0f;
     public float jumpForce = 8.0f;
+
     private Rigidbody rb;
     private bool isGrounded;
+
+    
 
     private int jumpCount;
     Transform camerat;
@@ -34,10 +37,7 @@ public class CharacterControl : MonoBehaviour
         }
         // Checking if the player is grounded, if they are then it allows them to double jump
         if (isGrounded) {
-            if (Input.GetKeyDown(KeyCode.Space) & (jumpCount <= 1) ) {
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                jumpCount += 1;
-            }
+            Jumping();
         }
         if (Input.anyKey == false) {
             anim.Play("Normal Status", 0, 1);
@@ -60,13 +60,47 @@ public class CharacterControl : MonoBehaviour
         Vector3 dir = right * hor + forward * ver;
         // moves player
         transform.position += dir * speed * Time.deltaTime;
-        // sets rotation to direction of camera
-        if (dir != Vector3.zero)  {
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(right * hor + forward * ver), 0.4f);
+        
+        
+        if(Input.GetKey(KeyCode.Mouse1))
+        {
+            transform.Rotate(0, Input.GetAxis("Mouse X"), 0);
         }
+        else
+        {
+            // sets rotation to direction of camera
+            if (dir != Vector3.zero)  {
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(right * hor + forward * ver), 0.4f);
+            }
+        }
+        
 
 
     }
+
+
+    // Function to control Double Jump acitions 
+    void Jumping()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && (jumpCount < 2))
+        {
+            //if player is on double jump, then game will perform jump action specific to double jump (e.g reduce height)
+            if(jumpCount == 1)
+            {
+                //double jump heigh reduced
+                rb.AddForce(Vector3.up * jumpForce/2, ForceMode.VelocityChange);
+                jumpCount += 1;
+            }
+            else
+            {
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
+                jumpCount += 1;
+            }
+            
+        }
+    }
+
+
     // Detect collision with ground
      void OnCollisionEnter(Collision collision) {
          if ((collision.gameObject.tag == "Ground") || (collision.gameObject.tag == "Platform")) {

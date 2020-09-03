@@ -1888,6 +1888,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &404737373330190107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404737373330190102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52a85c9e94d5c6245880a6e2a3fbed7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fallSpeed: 15
 --- !u!114 &404737373330190103
 MonoBehaviour:
   m_ObjectHideFlags: 0
