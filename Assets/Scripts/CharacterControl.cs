@@ -6,12 +6,15 @@ public class CharacterControl : MonoBehaviour
 {
     public float rotspeed = 2.0f;
     public float speed = 5.0f;
+
+
     public float jumpForce = 8.0f;
+    public float reduceJump = 0.6f;
 
     private Rigidbody rb;
     private bool isGrounded;
 
-    
+    private GameObject mainCamera;
 
     private int jumpCount;
     Transform camerat;
@@ -23,6 +26,7 @@ public class CharacterControl : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         camerat = Camera.main.transform;
         anim = GetComponent<Animator>();
+        mainCamera = GameObject.FindWithTag("MainCamera");
     }
 
     // Update is called once per frame
@@ -64,6 +68,7 @@ public class CharacterControl : MonoBehaviour
         
         if(Input.GetKey(KeyCode.Mouse1))
         {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(forward), 0.2f);
             transform.Rotate(0, Input.GetAxis("Mouse X"), 0);
         }
         else
@@ -87,8 +92,9 @@ public class CharacterControl : MonoBehaviour
             //if player is on double jump, then game will perform jump action specific to double jump (e.g reduce height)
             if(jumpCount == 1)
             {
-                //double jump heigh reduced
-                rb.AddForce(Vector3.up * jumpForce/2, ForceMode.VelocityChange);
+                //velocity is reset to zero to allow for consistent double jump heigh (regards of when double jump is inputed)
+                rb.velocity = Vector3.zero;
+                rb.AddForce(Vector3.up * (jumpForce * reduceJump), ForceMode.VelocityChange);
                 jumpCount += 1;
             }
             else

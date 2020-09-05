@@ -16,9 +16,11 @@ public class jumpPhysics : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (rb.velocity.y < 0)
         {
-            rb.velocity += Vector3.down * (fallSpeed - 1) * Time.deltaTime;
+            rb.AddForce(Vector3.down * fallSpeed, ForceMode.VelocityChange);
+            //rb.velocity += Vector3.up * Physics.gravity.y * (fallSpeed - 1) * Time.deltaTime;
         }
     }
 }
