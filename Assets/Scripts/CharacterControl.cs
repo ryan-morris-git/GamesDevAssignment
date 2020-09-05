@@ -9,7 +9,6 @@ public class CharacterControl : MonoBehaviour
 
 
     public float jumpForce = 8.0f;
-    public float reduceJump = 0.6f;
 
     private Rigidbody rb;
     private bool isGrounded;
@@ -94,7 +93,7 @@ public class CharacterControl : MonoBehaviour
             {
                 //velocity is reset to zero to allow for consistent double jump heigh (regards of when double jump is inputed)
                 rb.velocity = Vector3.zero;
-                rb.AddForce(Vector3.up * (jumpForce * reduceJump), ForceMode.VelocityChange);
+                rb.AddForce(Vector3.up * (jumpForce), ForceMode.VelocityChange);
                 jumpCount += 1;
             }
             else
