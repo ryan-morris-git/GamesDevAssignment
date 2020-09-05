@@ -14,8 +14,13 @@ public class PlayerCamera : MonoBehaviour
     float mousex;
     float mousey;
 
+
+    //private GameObject thePlayer;
+
     void Start() {
         Cursor.visible = false;
+
+        //thePlayer = GameObject.FindWithTag("Player");
     }
     void LateUpdate() {
         mousex += Input.GetAxis("Mouse X");
@@ -26,7 +31,9 @@ public class PlayerCamera : MonoBehaviour
 
         Vector3 targetRotation = new Vector3 (mousey, mousex);
         transform.eulerAngles = targetRotation;
-
         transform.position = target.position - transform.forward * distFromTarget;
+        
+
+            
     } 
 }
