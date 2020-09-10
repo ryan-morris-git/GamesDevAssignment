@@ -7,7 +7,7 @@ public class PlayerCamera : MonoBehaviour
     public float rotSpeed = 8;
     public Transform target;
     public float distFromTarget = 2;
-    public Vector2 yminmax = new Vector2 (-40, 85);
+    public Vector2 yminmax = new Vector2 (-6, 85);
     public float rotationSmooth = .12f;
     Vector3 rotationSmoothVel;
     Vector3 currentRot;
