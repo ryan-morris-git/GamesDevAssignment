@@ -1287,8 +1287,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1723377700}
-  m_LocalRotation: {x: 0.063989244, y: 0.7236041, z: 0.067728974, w: -0.6838972}
-  m_LocalPosition: {x: 162.41005, y: 27.89639, z: 4.2822795}
+  m_LocalRotation: {x: 0.061628442, y: 0.70441604, z: 0.061628442, w: -0.70441604}
+  m_LocalPosition: {x: 162.40846, y: 28.218206, z: 4.4421735}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 198522494}
@@ -1881,6 +1881,7 @@ GameObject:
   - component: {fileID: 404737373330190104}
   - component: {fileID: 404737373330190103}
   - component: {fileID: 404737373330190105}
+  - component: {fileID: 404737373330190107}
   m_Layer: 0
   m_Name: Jammo_LowPoly
   m_TagString: Player
@@ -1888,19 +1889,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &404737373330190107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 404737373330190102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52a85c9e94d5c6245880a6e2a3fbed7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fallSpeed: 0.4
 --- !u!114 &404737373330190103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1915,7 +1903,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotspeed: 2
   speed: 6
-  jumpForce: 6
+  jumpForce: 15
 --- !u!54 &404737373330190104
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1945,6 +1933,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.6, z: 1}
   m_Center: {x: 0, y: 0.8, z: 0}
+--- !u!114 &404737373330190107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404737373330190102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52a85c9e94d5c6245880a6e2a3fbed7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fallSpeed: 0.4
 --- !u!1 &406551815693441907
 GameObject:
   m_ObjectHideFlags: 0
