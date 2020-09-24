@@ -16,7 +16,7 @@ public class Reticle : MonoBehaviour
     void Update()
     {
         if (CharacterControl.aiming == true) {
-            AimReticle.color = new Color(AimReticle.color.r, AimReticle.color.g, AimReticle.color.b, 1.0f);
+            AimReticle.color = new Color(AimReticle.color.r, AimReticle.color.g, AimReticle.color.b, 255.0f);
         } else {
             AimReticle.color = new Color(AimReticle.color.r, AimReticle.color.g, AimReticle.color.b, 0.0f);
         }

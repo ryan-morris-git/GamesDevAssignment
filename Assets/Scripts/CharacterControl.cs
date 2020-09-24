@@ -18,18 +18,9 @@ public class CharacterControl : MonoBehaviour
     private int jumpCount;
     Transform camerat;
     Animator anim;
-<<<<<<< HEAD
-    public static bool aiming;
+    public static bool aiming = false;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> parent of e409cf1... Update: Hub World UI elements constructed
 
-=======
->>>>>>> parent of e409cf1... Update: Hub World UI elements constructed
-=======
->>>>>>> parent of e409cf1... Update: Hub World UI elements constructed
     // Start is called before the first frame update
     void Start()
     {
@@ -56,21 +47,16 @@ public class CharacterControl : MonoBehaviour
         if (Input.anyKey == false) {
             anim.Play("Normal Status", 0, 1);
         }
-<<<<<<< HEAD
-        float targetRotation = Mathf.Atan2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * Mathf.Rad2Deg + camerat.eulerAngles.y;  
-    }  
-=======
         float targetRotation = Mathf.Atan2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * Mathf.Rad2Deg + camerat.eulerAngles.y;
+
+
+        
 
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of e409cf1... Update: Hub World UI elements constructed
-=======
->>>>>>> parent of e409cf1... Update: Hub World UI elements constructed
-=======
->>>>>>> parent of e409cf1... Update: Hub World UI elements constructed
+    
+
+
     void PlayerMove() {
         // defines horizontal and vertical controls
         float hor = Input.GetAxis("Horizontal");
