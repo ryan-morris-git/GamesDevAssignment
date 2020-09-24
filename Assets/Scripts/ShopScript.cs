@@ -11,6 +11,7 @@ public class ShopScript : MonoBehaviour
 	public GameObject shopMenuUI;
 
 	public static bool isInShop = false;
+	public static bool nearShop = false;
 
 	void OnTriggerEnter(Collider col)
 	{
@@ -20,11 +21,7 @@ public class ShopScript : MonoBehaviour
 			{
 				interactText.SetActive(true);
 			}
-			if (Input.GetKeyDown(KeyCode.E))
-            {
-				EnterShop();
-            }
-
+			nearShop = true;
 		}
 	}
 
@@ -37,6 +34,7 @@ public class ShopScript : MonoBehaviour
 			{
 				interactText.SetActive(false);
 			}
+			nearShop = true;
 		}
 
 		
@@ -45,10 +43,14 @@ public class ShopScript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
     {
+		if(nearShop && Input.GetKeyDown(KeyCode.E))
+        {
+			EnterShop();
+        }
+
         if(isInShop)
         {
             if (Input.GetKeyDown(KeyCode.Escape)){
-				isInShop = false;
 				ExitShop();
             }
 
