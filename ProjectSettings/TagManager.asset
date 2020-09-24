@@ -7,7 +7,6 @@ TagManager:
   - Ground
   - Platform
   - ThePlayer
-  - ShopUI
   - PatrolPoint
   layers:
   - Default
