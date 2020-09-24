@@ -147,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 29943456}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.31, z: 0.5}
+  m_LocalPosition: {x: 0, y: 1.31, z: 0.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4468520221372461}
@@ -1901,14 +1901,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curState: 1
   moveSpeed: 5
-  rotSpeed: 2
+  rotSpeed: 20
   chaseRange: 35
-  attackRange: 20
   stopRange: 10
   health: 20
   shootSpeed: 2
   bulletSpawnPoint: {fileID: 29943456}
   bullet: {fileID: 9197725720837235476, guid: b1ab33bcfc63b5b43b4d44ab53010779, type: 3}
+  power: 1500
 --- !u!54 &1169883168
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1923,7 +1923,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!1 &1188634591
 GameObject:
@@ -3603,6 +3603,7 @@ GameObject:
   - component: {fileID: 95812470028159325}
   - component: {fileID: 1169883168}
   - component: {fileID: 1169883167}
+  - component: {fileID: 1997645940653218}
   m_Layer: 0
   m_Name: Robot_Soldier_Blue
   m_TagString: Untagged
@@ -3610,6 +3611,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &1997645940653218
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997645940653217}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 0.44}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!4 &4012714495182311
 Transform:
   m_ObjectHideFlags: 0

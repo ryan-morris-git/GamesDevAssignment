@@ -18,13 +18,11 @@ public class EnemyFSM : MonoBehaviour
     // Movement Speed
     public float moveSpeed = 5.0f;
     // Rotation speed
-    public float rotSpeed = 2.0f;
+    public float rotSpeed = 6.0f;
     // Chase range
     public float chaseRange = 35.0f;
-    // Attack range
-    public float attackRange = 20.0f;
-
-    public float stopRange = 10.0f;
+    // Stop range
+    public float stopRange = 20.0f;
 
     // Player transform
     protected Transform playerTransform;
@@ -33,17 +31,20 @@ public class EnemyFSM : MonoBehaviour
     // List of destination points
     protected GameObject[] pointList;
 
+    Animator anim;
+
     // Boolean checking whether or not enemy is dead
     protected bool bDead;
+    protected bool moving = false;
     public int health = 20;
     private Rigidbody rb;
     public float shootSpeed = 2.0f;
     private float elapsedTime;
     private GameObject Player;
-    Animator anim;
     
     public GameObject bulletSpawnPoint;
     public GameObject bullet;
+    public float power = 1500.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -92,40 +93,44 @@ public class EnemyFSM : MonoBehaviour
             curState = FSMState.Chase;
         }
         // Go to attack state if within range
-        if ((distance <= attackRange) & (health > 0)) {
+        if ((distance <= stopRange) & (health > 0)) {
             curState = FSMState.Attack;
         }
     }
 
     protected void Move() {
-        Quaternion targetRotation = Quaternion.LookRotation(destPos - transform.position);
-        GetComponent<Rigidbody>().MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotSpeed));
-        GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position + transform.forward * Time.deltaTime * moveSpeed);
-        anim.SetBool("Running", true);
+        if (moving) {
+            Quaternion targetRotation = Quaternion.LookRotation(destPos - transform.position);
+            GetComponent<Rigidbody>().MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotSpeed));
+            GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position + transform.forward * Time.deltaTime * moveSpeed);
+            anim.SetBool("Running", true);
+        }
      }
     void UpdatePatrolState() {
         if (Vector3.Distance(transform.position, destPos) <= 1.0f) {
             FindNextPoint();
         }
-
+        moving = true;
         Move();
     }
 
     void UpdateAttackState() {
-        if (Vector3.Distance(transform.position, playerTransform.position) > stopRange) {
+        if (Vector3.Distance(transform.position, playerTransform.position) <= stopRange) {
             destPos = new Vector3(Player.transform.position.x, 0.0f, Player.transform.position.z);
-            Quaternion enemyRotation = Quaternion.LookRotation(destPos - transform.position);
+            Quaternion targetRotation = Quaternion.LookRotation(destPos - transform.position);
             Move();
-        } else {
-            anim.SetBool("Running", false);
+            moving = false;
         }
         //Attack the player at a set interval
         if (elapsedTime >= shootSpeed) {
 				//Reset the time
 				elapsedTime = 0.0f;
 
-				if ((bulletSpawnPoint) & (bullet))
-					Instantiate(bullet, bulletSpawnPoint.transform.position, bulletSpawnPoint.transform.rotation);
+				if ((bulletSpawnPoint) & (bullet)) {
+					GameObject instance = Instantiate(bullet, bulletSpawnPoint.transform.position, transform.rotation);
+                    Vector3 fwd = transform.TransformDirection(Vector3.forward);
+                    instance.GetComponent<Rigidbody>().AddForce(fwd * power);
+                }
             }
 
 		// Update the time
@@ -133,9 +138,11 @@ public class EnemyFSM : MonoBehaviour
     }
 
     void UpdateChaseState() {
-        destPos = new Vector3(Player.transform.position.x, 0.0f, Player.transform.position.z);
-        Quaternion enemyRotation = Quaternion.LookRotation(destPos - transform.position);
-        Move(); 
+        if (Vector3.Distance(transform.position, playerTransform.position) <= chaseRange) {    
+            destPos = new Vector3(Player.transform.position.x, 0.0f, Player.transform.position.z);
+            Quaternion targetRotation = Quaternion.LookRotation(destPos - transform.position);
+            Move(); 
+        }
     }
 
     void UpdateDeadState() {
