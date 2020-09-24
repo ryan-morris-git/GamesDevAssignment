@@ -22,9 +22,12 @@ public class CharacterControl : MonoBehaviour
     public static bool aiming;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> parent of e409cf1... Update: Hub World UI elements constructed
 
+=======
+>>>>>>> parent of e409cf1... Update: Hub World UI elements constructed
 =======
 >>>>>>> parent of e409cf1... Update: Hub World UI elements constructed
     // Start is called before the first frame update
@@ -62,6 +65,9 @@ public class CharacterControl : MonoBehaviour
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of e409cf1... Update: Hub World UI elements constructed
+=======
 >>>>>>> parent of e409cf1... Update: Hub World UI elements constructed
 =======
 >>>>>>> parent of e409cf1... Update: Hub World UI elements constructed
