@@ -8,6 +8,7 @@ TagManager:
   - Platform
   - ThePlayer
   - ShopUI
+  - PatrolPoint
   layers:
   - Default
   - TransparentFX
