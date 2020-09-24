@@ -16,10 +16,10 @@ public class CurrentWeapon : MonoBehaviour
     void Update()
     {
         if (Shooting.selectedWeapon == 0) {
-            curWeapon.text = "Current Weapon: Blaster";
+            curWeapon.text = "Weapon: Blaster";
         }
         else if (Shooting.selectedWeapon == 1) {
-            curWeapon.text = "Current Weapon: Grenade";
+            curWeapon.text = "Weapon: Grenade";
         }
     }
 }
