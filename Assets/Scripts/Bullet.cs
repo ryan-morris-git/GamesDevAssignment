@@ -6,6 +6,8 @@ public class Bullet : MonoBehaviour
 {
     public float lifeTime = 3.0f;
     public float elapsedTime;
+    public int damage = 20;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,8 +19,19 @@ public class Bullet : MonoBehaviour
     {
         elapsedTime += Time.deltaTime;
 
-        if (elapsedTime >= lifeTime) {
+        if (elapsedTime >= lifeTime)
+        {
             Destroy(this.gameObject);
         }
+
+        /*RaycastHit hit;
+        if(Phsyics.Linecast(transform.position, ))
+
+        if (hit.collider)
+        {
+
+        }*/
     }
+
+   
 }
