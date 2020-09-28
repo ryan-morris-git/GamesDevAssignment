@@ -8,6 +8,9 @@ TagManager:
   - Platform
   - ThePlayer
   - ShopUI
+  - NPCWalkPoint
+  - Guard
+  - Bullet
   layers:
   - Default
   - TransparentFX
