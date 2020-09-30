@@ -7,6 +7,9 @@ public class MovingPlatformAttach : MonoBehaviour
     public GameObject platform;
     public GameObject player;
 
+    void Start() {
+        player = GameObject.FindWithTag("Player");
+    }
     void OnTriggerEnter() {
         player.transform.parent.parent = platform.transform;
     }
