@@ -15,12 +15,8 @@ public class PlayerCamera : MonoBehaviour
     float mousey;
 
 
-    //private GameObject thePlayer;
-
     void Start() {
         Cursor.visible = false;
-
-        //thePlayer = GameObject.FindWithTag("Player");
     }
     void LateUpdate() {
         mousex += Input.GetAxis("Mouse X");
@@ -33,7 +29,12 @@ public class PlayerCamera : MonoBehaviour
         transform.eulerAngles = targetRotation;
         transform.position = target.position - transform.forward * distFromTarget;
         
-
-            
+        if (CharacterControl.aiming == true) {
+            distFromTarget = 2.5f;
+            transform.position = new Vector3 (transform.position.x + 1f, transform.position.y + 1f, transform.position.z);
+        } else {
+            distFromTarget = 4;
+            transform.position = target.position - transform.forward * distFromTarget;
+        }
     } 
 }

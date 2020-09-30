@@ -7,6 +7,9 @@ TagManager:
   - Ground
   - Platform
   - ShopUI
+  - NPCWalkPoint
+  - Guard
+  - Bullet
   - Dummy
   layers:
   - Default
