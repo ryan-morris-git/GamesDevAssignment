@@ -10,14 +10,14 @@ public class MovingPlatformAttach : MonoBehaviour
     void Start() {
         
     }
-
-    // NPCs seem to trigger it as well??
-    void OnTriggerEnter() {
-        player = GameObject.FindWithTag("Player");
-        player.transform.parent.parent = platform.transform;
+    void OnTriggerEnter(Collider other) {
+        if (other.gameObject == player) {
+            player.transform.parent.parent = platform.transform;
+        }
     }
-    void OnTriggerExit() {
-        player = GameObject.FindWithTag("Player");
-        player.transform.parent.parent = null;
+    void OnTriggerExit(Collider other) {
+        if (other.gameObject == player) {
+            player.transform.parent.parent = null;
+        }
     }
 }
