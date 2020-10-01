@@ -24,13 +24,10 @@ public class Bullet : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        /*RaycastHit hit;
-        if(Phsyics.Linecast(transform.position, ))
-
-        if (hit.collider)
+        if (Physics.Raycast(transform.position, transform.forward, 1))
         {
-
-        }*/
+            Destroy(this.gameObject);
+        }
     }
 
    
