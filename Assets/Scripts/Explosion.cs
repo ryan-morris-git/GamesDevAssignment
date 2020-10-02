@@ -21,4 +21,10 @@ public class Explosion : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+        void OnCollisionEnter(Collider other) {
+        if (other.gameObject.CompareTag("Enemy")) {
+            other.gameObject.SendMessage("ApplyDamage", 20);
+        }
+    }
 }

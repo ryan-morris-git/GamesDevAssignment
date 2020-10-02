@@ -16,27 +16,27 @@ public class EnemyFSM : MonoBehaviour
     public FSMState curState;
 
     // Movement Speed
-    public float moveSpeed = 5.0f;
+    public float moveSpeed = 8.0f;
     // Rotation speed
-    public float rotSpeed = 6.0f;
+    public float rotSpeed = 16.0f;
     // Chase range
-    public float chaseRange = 35.0f;
+    public float chaseRange = 20.0f;
     // Stop range
-    public float stopRange = 20.0f;
+    public float stopRange = 10.0f;
 
     // Player transform
     protected Transform playerTransform;
     // Destination position
     protected Vector3 destPos;
     // List of destination points
-    protected GameObject[] pointList;
+    protected GameObject[] pointListEnemy;
 
     Animator anim;
 
     // Boolean checking whether or not enemy is dead
     protected bool bDead;
     protected bool moving = false;
-    public int health = 20;
+    public int health;
     private Rigidbody rb;
     public float shootSpeed = 2.0f;
     private float elapsedTime;
@@ -44,7 +44,8 @@ public class EnemyFSM : MonoBehaviour
     
     public GameObject bulletSpawnPoint;
     public GameObject bullet;
-    public float power = 1500.0f;
+    public float power = 150.0f;
+    public GameObject enemyExplosion;
 
     // Start is called before the first frame update
     void Start()
@@ -53,7 +54,7 @@ public class EnemyFSM : MonoBehaviour
 
         bDead = false;
 
-        pointList = GameObject.FindGameObjectsWithTag("PatrolPoint");
+        pointListEnemy = GameObject.FindGameObjectsWithTag("EnemyPatrolPoint");
         FindNextPoint(); 
 
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -64,6 +65,8 @@ public class EnemyFSM : MonoBehaviour
         elapsedTime = shootSpeed;
 
         anim = GetComponent<Animator>();
+
+        health = 20;
     }
 
 
@@ -71,6 +74,9 @@ public class EnemyFSM : MonoBehaviour
     void Update()
     {
         float distance = Vector3.Distance(transform.position, playerTransform.position);
+        Quaternion targetRotation = Quaternion.LookRotation(destPos - transform.position);
+        GetComponent<Rigidbody>().MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotSpeed));
+        
 
         switch (curState)
         {
@@ -107,6 +113,7 @@ public class EnemyFSM : MonoBehaviour
         }
      }
     void UpdatePatrolState() {
+        FindNextPoint();
         if (Vector3.Distance(transform.position, destPos) <= 1.0f) {
             FindNextPoint();
         }
@@ -118,8 +125,9 @@ public class EnemyFSM : MonoBehaviour
         if (Vector3.Distance(transform.position, playerTransform.position) <= stopRange) {
             destPos = new Vector3(Player.transform.position.x, 0.0f, Player.transform.position.z);
             Quaternion targetRotation = Quaternion.LookRotation(destPos - transform.position);
-            Move();
             moving = false;
+        } else {
+            moving = true;
         }
         //Attack the player at a set interval
         if (elapsedTime >= shootSpeed) {
@@ -127,8 +135,8 @@ public class EnemyFSM : MonoBehaviour
 				elapsedTime = 0.0f;
 
 				if ((bulletSpawnPoint) & (bullet)) {
-					GameObject instance = Instantiate(bullet, bulletSpawnPoint.transform.position, transform.rotation);
-                    Vector3 fwd = transform.TransformDirection(Vector3.forward);
+					GameObject instance = Instantiate(bullet, bulletSpawnPoint.transform.position, bulletSpawnPoint.transform.rotation);
+                    Vector3 fwd = (playerTransform.position - bulletSpawnPoint.transform.position).normalized;
                     instance.GetComponent<Rigidbody>().AddForce(fwd * power);
                 }
             }
@@ -143,14 +151,30 @@ public class EnemyFSM : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(destPos - transform.position);
             Move(); 
         }
+        if (Vector3.Distance(transform.position, playerTransform.position) >= chaseRange) {  
+            curState = FSMState.Patrol;
+        }
     }
 
     void UpdateDeadState() {
         bDead = true;
+        Destroy(this.gameObject);
+        Instantiate(enemyExplosion, transform.position, transform.rotation);
     }
     protected void FindNextPoint()
     {
-        int rndIndex = Random.Range(0, pointList.Length);
-        destPos = pointList[rndIndex].transform.position;
+        int rndIndex = Random.Range(0, pointListEnemy.Length);
+        destPos = pointListEnemy[rndIndex].transform.position;
+    }
+
+
+    protected void OnTriggerEnter(Collider other) {
+        if (other.gameObject.tag == "Bullet") {
+            Destroy(other);
+            health -= 5;
+        }
+        if (other.gameObject.tag == "Grenade") {
+            health -= 15;
+        }
     }
 }

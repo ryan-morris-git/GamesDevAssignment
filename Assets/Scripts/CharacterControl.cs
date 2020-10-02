@@ -6,6 +6,7 @@ public class CharacterControl : MonoBehaviour
 {
     public float rotspeed = 2.0f;
     public float speed = 5.0f;
+    public static int playerHealth;
 
 
     public float jumpForce = 8.0f;
@@ -28,6 +29,8 @@ public class CharacterControl : MonoBehaviour
         camerat = Camera.main.transform;
         anim = GetComponent<Animator>();
         mainCamera = GameObject.FindWithTag("MainCamera");
+
+        playerHealth = 100;
     }
 
     // Update is called once per frame
@@ -129,4 +132,11 @@ public class CharacterControl : MonoBehaviour
              isGrounded = false;
          }
      }
+
+    protected void OnTriggerEnter(Collider other) {
+        if (other.gameObject.tag == "Bullet") {
+            Destroy(other);
+            playerHealth -= 5;
+        }
+    }
 }
