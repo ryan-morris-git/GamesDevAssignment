@@ -25,13 +25,15 @@ public class NPCFSM : MonoBehaviour
     protected GameObject[] pointList;
     private GameObject Guard;
     private GameObject player;
-    public static bool guardNotified = false;
+    public static bool guardNotified;
 
     
     
     // Start is called before the first frame update
     void Start()
     {
+        guardNotified = false;
+
         curState = FSMState.Walk;
 
         pointList = GameObject.FindGameObjectsWithTag("NPCWalkPoint");
@@ -57,15 +59,23 @@ public class NPCFSM : MonoBehaviour
 
         if (Vector3.Distance(transform.position, Guard.transform.position) <= 2.0f) {
             guardNotified = true;
+            moveSpeed = 5.0f;
+            RunAway();
+        }
 
-            destPos = new Vector3(player.transform.position.x, 0.0f, player.transform.position.z);
-            moveSpeed = 0.0f;
-            Move();
+        if (guardNotified == true) {
+            RunAway();
         }
     }
 
     void Move() {
         Quaternion targetRotation = Quaternion.LookRotation(destPos - transform.position);
+        GetComponent<Rigidbody>().MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotSpeed));
+        GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position + transform.forward * Time.deltaTime * moveSpeed);
+    }
+
+    void RunAway() {
+        Quaternion targetRotation = Quaternion.LookRotation(transform.position - GameObject.FindGameObjectWithTag("Player").transform.position);
         GetComponent<Rigidbody>().MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotSpeed));
         GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position + transform.forward * Time.deltaTime * moveSpeed);
     }
