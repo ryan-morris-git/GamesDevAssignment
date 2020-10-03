@@ -5,10 +5,10 @@ using UnityEngine;
 public class MovingPlatformAttach : MonoBehaviour
 {
     public GameObject platform;
-    public GameObject player;
+    private GameObject player;
 
     void Start() {
-        
+        player = GameObject.FindWithTag("Player");
     }
     void OnTriggerEnter(Collider other) {
         if (other.gameObject == player) {
