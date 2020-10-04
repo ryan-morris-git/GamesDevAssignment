@@ -138,5 +138,16 @@ public class CharacterControl : MonoBehaviour
             Destroy(other);
             playerHealth -= 5;
         }
+        if (other.gameObject.tag == "Guard") {
+            if (Vector3.Distance(transform.position, other.gameObject.transform.position) <= 4.0f) {
+                if (NPCFSM.guardNotified == true) {
+                    rb.AddForce((transform.position - other.gameObject.transform.position) * 250, ForceMode.VelocityChange);
+                    playerHealth -= 30;
+                } else {
+                    rb.AddForce((transform.position - other.gameObject.transform.position) * 25, ForceMode.VelocityChange);
+                }
+            }
+        }
+        
     }
 }

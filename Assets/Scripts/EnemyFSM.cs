@@ -17,7 +17,7 @@ public class EnemyFSM : MonoBehaviour
     public FSMState curState;
 
     // Movement Speed
-    public float moveSpeed = 8.0f;
+    public float moveSpeed;
     // Rotation speed
     public float rotSpeed = 16.0f;
     // Chase range
@@ -54,6 +54,8 @@ public class EnemyFSM : MonoBehaviour
         curState = FSMState.Patrol;
 
         bDead = false;
+
+        moveSpeed = 8.0f;
 
         pointListEnemy = GameObject.FindGameObjectsWithTag("EnemyPatrolPoint");
         FindNextPoint(); 

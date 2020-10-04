@@ -20,12 +20,15 @@ public class Guard : MonoBehaviour
     // Rotation speed
     public float rotSpeed = 10.0f;
 
-    public float stopDist = 1.5f;
+    public float stopDist = 0.0f;
 
     // Destination position
     protected Vector3 destPos;
     // List of destination points
     private GameObject player;
+
+    private Rigidbody rigbod;
+
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +38,10 @@ public class Guard : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
 
         destPos = player.transform.position;
+
+        rigbod = GetComponent<Rigidbody>();
+
+        rigbod.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotationX;
     }
 
     // Update is called once per frame
@@ -71,6 +78,7 @@ public class Guard : MonoBehaviour
         if (Vector3.Distance(transform.position, player.transform.position) >= stopDist) {
             Move();
             destPos = player.transform.position;
+            rigbod.constraints = ~RigidbodyConstraints.FreezePosition;
         }
     }
 }
