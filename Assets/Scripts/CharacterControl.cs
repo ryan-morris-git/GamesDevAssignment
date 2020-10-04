@@ -8,7 +8,6 @@ public class CharacterControl : MonoBehaviour
     public float speed = 5.0f;
     public static int playerHealth;
 
-
     public float jumpForce = 8.0f;
 
     private Rigidbody rb;
@@ -20,6 +19,7 @@ public class CharacterControl : MonoBehaviour
     Transform camerat;
     Animator anim;
     public static bool aiming = false;
+
 
 
     // Start is called before the first frame update
@@ -131,6 +131,8 @@ public class CharacterControl : MonoBehaviour
          if (jumpCount > 1) {
              isGrounded = false;
          }
+
+
      }
 
     protected void OnTriggerEnter(Collider other) {

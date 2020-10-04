@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovingPlatformAttach : MonoBehaviour
 {
     public GameObject platform;
-    public GameObject player;
+    private GameObject player;
 
     void Start() {
         player = GameObject.FindWithTag("Player");
