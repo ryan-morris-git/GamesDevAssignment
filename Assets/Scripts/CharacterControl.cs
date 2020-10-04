@@ -6,6 +6,7 @@ public class CharacterControl : MonoBehaviour
 {
     public float rotspeed = 2.0f;
     public float speed = 5.0f;
+    public static int playerHealth;
 
     public float jumpForce = 8.0f;
 
@@ -28,6 +29,8 @@ public class CharacterControl : MonoBehaviour
         camerat = Camera.main.transform;
         anim = GetComponent<Animator>();
         mainCamera = GameObject.FindWithTag("MainCamera");
+
+        playerHealth = 100;
     }
 
     // Update is called once per frame
@@ -131,4 +134,22 @@ public class CharacterControl : MonoBehaviour
 
 
      }
+
+    protected void OnTriggerEnter(Collider other) {
+        if (other.gameObject.tag == "Bullet") {
+            Destroy(other);
+            playerHealth -= 5;
+        }
+        if (other.gameObject.tag == "Guard") {
+            if (Vector3.Distance(transform.position, other.gameObject.transform.position) <= 4.0f) {
+                if (NPCFSM.guardNotified == true) {
+                    rb.AddForce((transform.position - other.gameObject.transform.position) * 250, ForceMode.VelocityChange);
+                    playerHealth -= 30;
+                } else {
+                    rb.AddForce((transform.position - other.gameObject.transform.position) * 25, ForceMode.VelocityChange);
+                }
+            }
+        }
+        
+    }
 }

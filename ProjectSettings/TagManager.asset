@@ -10,6 +10,10 @@ TagManager:
   - NPCWalkPoint
   - Guard
   - Bullet
+  - EnemyPatrolPoint
+  - Grenade
+  - Fire
+  - Enemy
   - Dummy
   layers:
   - Default

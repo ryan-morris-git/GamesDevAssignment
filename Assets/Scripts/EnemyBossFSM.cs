@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyFSM : MonoBehaviour
+public class EnemyBossFSM : MonoBehaviour
 {
     public enum FSMState
     {
@@ -11,19 +11,18 @@ public class EnemyFSM : MonoBehaviour
         Dead,
         Chase,
         Attack,
-        Flee,
     }
 
     public FSMState curState;
 
     // Movement Speed
-    public float moveSpeed;
+    public float moveSpeed = 10.0f;
     // Rotation speed
     public float rotSpeed = 16.0f;
     // Chase range
     public float chaseRange = 20.0f;
     // Stop range
-    public float stopRange = 10.0f;
+    public float stopRange = 12.0f;
 
     // Player transform
     protected Transform playerTransform;
@@ -39,14 +38,16 @@ public class EnemyFSM : MonoBehaviour
     protected bool moving = false;
     public int health;
     private Rigidbody rb;
-    public float shootSpeed = 2.0f;
+    public float shootSpeed = 1.0f;
     private float elapsedTime;
     private GameObject Player;
     
     public GameObject bulletSpawnPoint;
     public GameObject bullet;
-    public float power = 1000.0f;
+    public float power = 1500.0f;
     public GameObject enemyExplosion;
+
+    public static bool bossDead;
 
     // Start is called before the first frame update
     void Start()
@@ -55,7 +56,7 @@ public class EnemyFSM : MonoBehaviour
 
         bDead = false;
 
-        moveSpeed = 8.0f;
+        bossDead = false;
 
         pointListEnemy = GameObject.FindGameObjectsWithTag("EnemyPatrolPoint");
         FindNextPoint(); 
@@ -69,7 +70,7 @@ public class EnemyFSM : MonoBehaviour
 
         anim = GetComponent<Animator>();
 
-        health = 20;
+        health = 100;
     }
 
 
@@ -87,7 +88,6 @@ public class EnemyFSM : MonoBehaviour
             case FSMState.Dead: UpdateDeadState(); break;
             case FSMState.Chase: UpdateChaseState(); break;
             case FSMState.Attack: UpdateAttackState(); break;
-            case FSMState.Flee: UpdateFleeState(); break;
         }
 
         // Go to dead state if no health left
@@ -105,14 +105,6 @@ public class EnemyFSM : MonoBehaviour
         // Go to attack state if within range
         if ((distance <= stopRange) & (health > 0)) {
             curState = FSMState.Attack;
-        }
-        // Flee if boss is dead
-        if ((EnemyBossFSM.bossDead == true) & (health > 0)) {
-            curState = FSMState.Flee;
-        }
-
-        if (Vector3.Distance(transform.position, playerTransform.position) >= 100.0f) {
-            Destroy(this.gameObject);
         }
     }
 
@@ -170,16 +162,9 @@ public class EnemyFSM : MonoBehaviour
 
     void UpdateDeadState() {
         bDead = true;
+        bossDead = true;
         Destroy(this.gameObject);
         Instantiate(enemyExplosion, transform.position, transform.rotation);
-    }
-
-    void UpdateFleeState() {
-        moveSpeed = 14.0f;
-        Quaternion targetRotation = Quaternion.LookRotation(transform.position - playerTransform.position);
-        GetComponent<Rigidbody>().MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotSpeed));
-        GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position + transform.forward * Time.deltaTime * moveSpeed);
-        anim.SetBool("Running", true);
     }
     protected void FindNextPoint()
     {

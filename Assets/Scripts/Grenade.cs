@@ -6,7 +6,7 @@ public class Grenade : MonoBehaviour
 {
     public float explodeTime = 3.0f;
     public float elapsedTime;
-    public float radius = 5.0f;
+    public float radius = 10.0f;
     public float explosionForce = 10.0f;
     bool hasExploded = false;
     public GameObject explosion;
@@ -43,5 +43,12 @@ public class Grenade : MonoBehaviour
         }
 
         Destroy(this.gameObject);
+    }
+
+    protected void OnTriggerEnter(Collider other) {
+        if (other.gameObject.tag == "Enemy") {
+            Explode();
+            hasExploded = true;
+        }
     }
 }
