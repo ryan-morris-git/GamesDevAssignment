@@ -21,6 +21,9 @@ public class CharacterControl : MonoBehaviour
     public static bool aiming = false;
 
 
+    public GameObject RespawnLocation;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -151,5 +154,10 @@ public class CharacterControl : MonoBehaviour
             }
         }
         
+    }
+
+    public void RespawnPlayer()
+    {
+        transform.position = RespawnLocation.transform.position;
     }
 }
