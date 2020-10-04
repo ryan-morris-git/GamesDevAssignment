@@ -35,7 +35,7 @@ public class EnemyFSM : MonoBehaviour
     Animator anim;
 
     // Boolean checking whether or not enemy is dead
-    protected bool bDead;
+    public bool bDead; //change to public for Spawning acceess
     protected bool moving = false;
     public int health;
     private Rigidbody rb;
