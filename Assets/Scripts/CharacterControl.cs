@@ -19,6 +19,7 @@ public class CharacterControl : MonoBehaviour
     Transform camerat;
     Animator anim;
     public static bool aiming = false;
+    private AudioSource source;
 
 
 
@@ -29,6 +30,7 @@ public class CharacterControl : MonoBehaviour
         camerat = Camera.main.transform;
         anim = GetComponent<Animator>();
         mainCamera = GameObject.FindWithTag("MainCamera");
+        source = GetComponent<AudioSource>();
 
         playerHealth = 100;
     }
@@ -124,6 +126,7 @@ public class CharacterControl : MonoBehaviour
          if ((collision.gameObject.tag == "Ground") || (collision.gameObject.tag == "Platform")) {
              isGrounded = true;
              jumpCount = 0;
+             source.Play();
          }
      }
     // Detect collision exit with ground

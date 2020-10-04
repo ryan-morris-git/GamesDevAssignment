@@ -6,10 +6,13 @@ public class Explosion : MonoBehaviour
 {
     public float lifeTime = 4.0f;
     public float elapsedTime;
+    private AudioSource source;
     // Start is called before the first frame update
     void Start()
     {
         elapsedTime = 0.0f;
+        source = GetComponent<AudioSource>();
+        source.Play();
     }
 
     // Update is called once per frame
@@ -19,12 +22,6 @@ public class Explosion : MonoBehaviour
 
         if (elapsedTime >= lifeTime) {
             Destroy(this.gameObject);
-        }
-    }
-
-        void OnCollisionEnter(Collider other) {
-        if (other.gameObject.CompareTag("Enemy")) {
-            other.gameObject.SendMessage("ApplyDamage", 20);
         }
     }
 }
