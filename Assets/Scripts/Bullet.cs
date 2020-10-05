@@ -6,7 +6,6 @@ public class Bullet : MonoBehaviour
 {
     public float lifeTime = 3.0f;
     public float elapsedTime;
-    public int damage = 20;
 
     // Start is called before the first frame update
     void Start()
