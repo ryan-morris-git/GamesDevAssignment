@@ -29,6 +29,7 @@ public class CharacterControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         rb = GetComponent<Rigidbody>();
         camerat = Camera.main.transform;
         anim = GetComponent<Animator>();
