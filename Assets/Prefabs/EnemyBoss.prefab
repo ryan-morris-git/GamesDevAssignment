@@ -1401,7 +1401,6 @@ GameObject:
   - component: {fileID: 6569974052764688735}
   - component: {fileID: 6569974052764688736}
   - component: {fileID: 6569974052764688738}
-  - component: {fileID: 6569974052764688737}
   - component: {fileID: 6569102924895658464}
   m_Layer: 0
   m_Name: EnemyBoss
@@ -1446,7 +1445,7 @@ Animator:
   m_Avatar: {fileID: 9000000, guid: 535511bb156e7f54f83f305d96a1c4ce, type: 3}
   m_Controller: {fileID: 9100000, guid: de4c312b8a09ccb40960a5db96102e84, type: 2}
   m_CullingMode: 1
-  m_UpdateMode: 0
+  m_UpdateMode: 1
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -1496,21 +1495,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2, z: 0.5}
   m_Center: {x: 0, y: 1, z: 0}
---- !u!111 &6569974052764688737
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6569102924895658467}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 9f0376548525d7f46a10087a2cb9ff17, type: 3}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &6569102924895658464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1524,12 +1508,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curState: 0
-  moveSpeed: 8
+  moveSpeed: 10
   rotSpeed: 16
   chaseRange: 20
   stopRange: 10
   health: 0
-  shootSpeed: 4
+  shootSpeed: 1
   bulletSpawnPoint: {fileID: 6569974052473957367}
   bullet: {fileID: 9197725720837235476, guid: b1ab33bcfc63b5b43b4d44ab53010779, type: 3}
   power: 1000

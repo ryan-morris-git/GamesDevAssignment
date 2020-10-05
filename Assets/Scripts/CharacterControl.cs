@@ -55,7 +55,9 @@ public class CharacterControl : MonoBehaviour
         }
         float targetRotation = Mathf.Atan2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * Mathf.Rad2Deg + camerat.eulerAngles.y;
 
-
+        if (playerHealth <= 0) {
+            RespawnPlayer();
+        }
         
 
     }
@@ -158,6 +160,7 @@ public class CharacterControl : MonoBehaviour
 
     public void RespawnPlayer()
     {
+        playerHealth = 100;
         transform.position = RespawnLocation.transform.position;
     }
 }

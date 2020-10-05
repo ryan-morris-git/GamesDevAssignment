@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 286602677}
   m_Layer: 0
   m_Name: LaserBullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,6 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeTime: 3
   elapsedTime: 0
+  damage: 20
 --- !u!54 &-5123589662291885765
 Rigidbody:
   m_ObjectHideFlags: 0

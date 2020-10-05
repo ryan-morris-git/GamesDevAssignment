@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawing : MonoBehaviour
 {
-    public GameObject[] EnemeySquad;
+    public GameObject[] EnemySquad;
 
     private bool EngagePlayer = false;
 
@@ -19,11 +19,15 @@ public class EnemySpawing : MonoBehaviour
     {
         if(EngagePlayer)
         {
-            foreach(GameObject Enemy in EnemeySquad)
+            foreach(GameObject Enemy in EnemySquad)
             {
-                if(Enemy.GetComponent<EnemyFSM>().bDead == false)
-                {
-                    Enemy.SetActive(true);
+                if (Enemy) {
+                    if(Enemy.GetComponent<EnemyFSM>().bDead == false)
+                    {
+                        Enemy.SetActive(true);
+                    } else {
+                        Enemy.SetActive(false);
+                    }
                 }
             }
         }

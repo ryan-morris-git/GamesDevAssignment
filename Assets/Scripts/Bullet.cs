@@ -24,11 +24,13 @@ public class Bullet : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        if (Physics.Raycast(transform.position, transform.forward, 1))
-        {
-            Destroy(this.gameObject);
-        }
+        //if (Physics.Raycast(transform.position, transform.forward, 1))
+        //{
+            //Destroy(this.gameObject);
+        //}
     }
-
+    void OnCollisionEnter (Collider other) {
+        Destroy(this.gameObject);
+    }
    
 }

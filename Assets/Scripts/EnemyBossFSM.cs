@@ -7,7 +7,7 @@ public class EnemyBossFSM : MonoBehaviour
     public enum FSMState
     {
         None,
-        Patrol,
+        Wait,
         Dead,
         Chase,
         Attack,
@@ -52,14 +52,13 @@ public class EnemyBossFSM : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        curState = FSMState.Patrol;
+        curState = FSMState.Wait;
 
         bDead = false;
 
         bossDead = false;
 
         pointListEnemy = GameObject.FindGameObjectsWithTag("EnemyPatrolPoint");
-        FindNextPoint(); 
 
         Player = GameObject.FindGameObjectWithTag("Player");
         playerTransform = Player.transform;
@@ -80,11 +79,12 @@ public class EnemyBossFSM : MonoBehaviour
         float distance = Vector3.Distance(transform.position, playerTransform.position);
         Quaternion targetRotation = Quaternion.LookRotation(destPos - transform.position);
         GetComponent<Rigidbody>().MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotSpeed));
+        destPos = new Vector3(Player.transform.position.x, 0.0f, Player.transform.position.z);
         
 
         switch (curState)
         {
-            case FSMState.Patrol: UpdatePatrolState(); break;
+            case FSMState.Wait: UpdateWaitState(); break;
             case FSMState.Dead: UpdateDeadState(); break;
             case FSMState.Chase: UpdateChaseState(); break;
             case FSMState.Attack: UpdateAttackState(); break;
@@ -94,9 +94,9 @@ public class EnemyBossFSM : MonoBehaviour
         if (health <= 0) {
             curState = FSMState.Dead;
         }
-        // Go back to patrolling if out of range
+        // Go back to waiting if out of range
         if ((distance > chaseRange) & (health > 0)) {
-            curState = FSMState.Patrol;
+            curState = FSMState.Wait;
         }
         // Go to chase state if within range
         if ((distance <= chaseRange) & (health > 0)) {
@@ -105,6 +105,10 @@ public class EnemyBossFSM : MonoBehaviour
         // Go to attack state if within range
         if ((distance <= stopRange) & (health > 0)) {
             curState = FSMState.Attack;
+        }
+
+        if (Vector3.Distance(transform.position, playerTransform.position) >= 100.0f) {
+            this.gameObject.SetActive(false);
         }
     }
 
@@ -116,13 +120,10 @@ public class EnemyBossFSM : MonoBehaviour
             anim.SetBool("Running", true);
         }
      }
-    void UpdatePatrolState() {
-        FindNextPoint();
-        if (Vector3.Distance(transform.position, destPos) <= 1.0f) {
-            FindNextPoint();
-        }
-        moving = true;
-        Move();
+    void UpdateWaitState() {
+        destPos = playerTransform.position;
+        Quaternion targetRotation = Quaternion.LookRotation(destPos - transform.position);
+        GetComponent<Rigidbody>().MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotSpeed));
     }
 
     void UpdateAttackState() {
@@ -156,7 +157,7 @@ public class EnemyBossFSM : MonoBehaviour
             Move(); 
         }
         if (Vector3.Distance(transform.position, playerTransform.position) >= chaseRange) {  
-            curState = FSMState.Patrol;
+            curState = FSMState.Wait;
         }
     }
 
@@ -168,8 +169,10 @@ public class EnemyBossFSM : MonoBehaviour
     }
     protected void FindNextPoint()
     {
-        int rndIndex = Random.Range(0, pointListEnemy.Length);
-        destPos = pointListEnemy[rndIndex].transform.position;
+        if (pointListEnemy.Length > 0) {
+            int rndIndex = Random.Range(0, pointListEnemy.Length);
+            destPos = pointListEnemy[rndIndex].transform.position;
+        } 
     }
 
 

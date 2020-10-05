@@ -17,6 +17,7 @@ public class PlayerCamera : MonoBehaviour
 
     void Start() {
         Cursor.visible = false;
+        Screen.lockCursor = true;
     }
     void LateUpdate() {
         mousex += Input.GetAxis("Mouse X");
