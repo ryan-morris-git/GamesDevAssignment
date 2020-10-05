@@ -166,7 +166,7 @@ public class CharacterControl : MonoBehaviour
     public void RespawnPlayer()
     {
         playerHealth = 100;
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Level 1"))
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Level1"))
         {
             
             transform.position = RespawnLocation.transform.position;
