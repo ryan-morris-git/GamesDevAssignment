@@ -40,6 +40,13 @@ public class Shooting : MonoBehaviour
                 grenadeAmmo -= 1;
             }
         }
+
+        if (bulletAmmo > 20) {
+            bulletAmmo = 20;
+        }
+        if (grenadeAmmo > 6) {
+            grenadeAmmo = 6;
+        }
         
     }
     void SelectWeapon() {

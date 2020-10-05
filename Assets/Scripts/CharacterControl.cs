@@ -59,6 +59,9 @@ public class CharacterControl : MonoBehaviour
             RespawnPlayer();
         }
         
+        if (playerHealth > 100) {
+            playerHealth = 100;
+        }
 
     }
 
