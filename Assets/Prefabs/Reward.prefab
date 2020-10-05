@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3960612155744886356}
   - component: {fileID: 5745752276632294772}
   - component: {fileID: 6423863094371984957}
+  - component: {fileID: 2093672362}
   m_Layer: 0
   m_Name: Reward
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8172521578935266244}
-  m_LocalRotation: {x: 0.3124248, y: -0.0090227835, z: 0.0003338583, w: 0.9498996}
+  m_LocalRotation: {x: 0.3124217, y: -0.009026877, z: 0.0003367886, w: 0.94990057}
   m_LocalPosition: {x: 288.0206, y: 43.464, z: 173.088}
   m_LocalScale: {x: 0.2, y: 3.5, z: 3}
   m_Children: []
@@ -93,5 +94,18 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 33.905334, y: 1.8995749, z: 2.5629888}
+  m_Center: {x: 0.33340454, y: 0.18153225, z: 0.031183641}
+--- !u!114 &2093672362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8172521578935266244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e9e534b0137b6349a81780dc81769b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 1.5
