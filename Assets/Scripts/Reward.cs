@@ -5,14 +5,21 @@ using UnityEngine;
 public class Reward : MonoBehaviour
 {
     public float rotationSpeed = 1.5f;
+    public AudioClip collectSound;
     // Update is called once per frame
     void Update()
     {
         transform.Rotate(0, rotationSpeed * Time.deltaTime * 100, 0);
+        ;
     }
 
-    void OnTrigggerEnter(Collider col)
+    void OnTriggerEnter(Collider other)
     {
-        Debug.Log("I Got It");
+        if (other.tag == "Player")
+        {
+            AudioSource.PlayClipAtPoint(collectSound, transform.position);
+            Destroy(this.gameObject);
+        }
+        
     }
 }

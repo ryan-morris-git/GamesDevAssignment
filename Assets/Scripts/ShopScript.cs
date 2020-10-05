@@ -7,7 +7,10 @@ public class ShopScript : MonoBehaviour
 {
 
     public GameObject interactText;
-	public GameObject shopMenuUI;
+	public GameObject ShopKeeperText;
+    public GameObject shopMenuUI;
+
+	public GameObject shopkeeper;
 
 	public int maxBulletAmmo = 20;
 	public int maxGrenadeAmmo = 6;
@@ -22,11 +25,16 @@ public class ShopScript : MonoBehaviour
 	{
 		if (col.gameObject.tag == "Player")
 		{
-			if (interactText)
+			if ((Shooting.bulletAmmo < maxBulletAmmo || Shooting.grenadeAmmo < maxGrenadeAmmo))
 			{
+				nearShop = true;
 				interactText.SetActive(true);
 			}
-			nearShop = true;
+			else
+            {
+				ShopKeeperText.SetActive(true);
+            }
+			
 
 		}
 	}
@@ -40,6 +48,7 @@ public class ShopScript : MonoBehaviour
 			{
 				interactText.SetActive(false);
 			}
+			ShopKeeperText.SetActive(false);
 		}
 
 		nearShop = false;
@@ -49,20 +58,31 @@ public class ShopScript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
     {
-		
-		if (nearShop && Input.GetKeyDown(KeyCode.E))
+		//checks to see if the user can indeed buy ammo (Shop keeper NPC)
+		if (Shooting.bulletAmmo >= maxBulletAmmo && Shooting.grenadeAmmo >= maxGrenadeAmmo)
+        {
+			shopkeeper.SetActive(true);
+        }
+        else
+        {
+			shopkeeper.SetActive(false);
+        }
+			//checks if the user is near the shop to allow for interact E to open shop
+			if (nearShop && Input.GetKeyDown(KeyCode.E))
             {
+				Cursor.visible = true;
+				Screen.lockCursor = false;
 				EnterShop();
             }
         if(isInShop)
         {
             if (Input.GetKeyDown(KeyCode.Escape)){
+				Cursor.visible = false;
+				Screen.lockCursor = true;
 				ExitShop();
             }
 
         }
-
-		navigateMenu();
 
     }
 
@@ -92,10 +112,6 @@ public class ShopScript : MonoBehaviour
         {
 			Shooting.bulletAmmo = maxBulletAmmo;
         }
-		else
-        {
-
-        }
 		
     }
 
@@ -105,17 +121,10 @@ public class ShopScript : MonoBehaviour
         {
 			Shooting.grenadeAmmo = maxGrenadeAmmo;
         }
-        else
-        {
-
-        }
+       
 		
     }
 
 
-	void navigateMenu()
-    {
-		
-    }
 
 }

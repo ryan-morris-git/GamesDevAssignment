@@ -7,10 +7,6 @@ public class SelectLevel : MonoBehaviour
 	public GameObject interactText;
 	public GameObject missionSelectUI;
 
-	public int maxBulletAmmo = 20;
-	public int maxGrenadeAmmo = 6;
-
-	public string scrollDown;
 
 	public static bool isInSelection = false;
 	private static bool nearMissionSelect = false;
@@ -50,12 +46,16 @@ public class SelectLevel : MonoBehaviour
 
 		if (nearMissionSelect && Input.GetKeyDown(KeyCode.E))
 		{
+			Cursor.visible = true;
+			Screen.lockCursor = false;
 			EnterSelect();
 		}
 		if (isInSelection)
 		{
 			if (Input.GetKeyDown(KeyCode.Escape))
 			{
+				Cursor.visible = false;
+				Screen.lockCursor = true;
 				ExitSelect();
 			}
 
@@ -66,6 +66,8 @@ public class SelectLevel : MonoBehaviour
 
 	void EnterSelect()
 	{
+		
+
 		interactText.SetActive(false);
 		missionSelectUI.SetActive(true);
 		Time.timeScale = 0f;
@@ -75,6 +77,8 @@ public class SelectLevel : MonoBehaviour
 
 	void ExitSelect()
 	{
+		
+
 		interactText.SetActive(true);
 		missionSelectUI.SetActive(false);
 		Time.timeScale = 1f;

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterControl : MonoBehaviour
 {
@@ -164,6 +165,17 @@ public class CharacterControl : MonoBehaviour
     public void RespawnPlayer()
     {
         playerHealth = 100;
-        transform.position = RespawnLocation.transform.position;
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Level 1"))
+        {
+            
+            transform.position = RespawnLocation.transform.position;
+         }
+
+        else
+        {
+            SceneManager.LoadScene("HubWorld");
+            
+        }
+        
     }
 }

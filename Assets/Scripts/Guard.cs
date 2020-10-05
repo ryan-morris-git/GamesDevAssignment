@@ -79,6 +79,7 @@ public class Guard : MonoBehaviour
             Move();
             destPos = player.transform.position;
             rigbod.constraints = ~RigidbodyConstraints.FreezePosition;
+            
         }
     }
 }
